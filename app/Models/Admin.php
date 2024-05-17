@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 class Admin extends Authenticatable
 {
     use HasFactory, Notifiable;
-
+    protected $guard = 'admin';
     /**
      * The attributes that are mass assignable.
      *
@@ -40,8 +40,10 @@ class Admin extends Authenticatable
     protected function casts(): array
     {
         return [
+
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
 }
+
