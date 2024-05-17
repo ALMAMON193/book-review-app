@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 
@@ -35,3 +36,16 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     //             ->name('logout');
 });
 
+
+//Book related route
+Route::middleware('auth:admin')->prefix('admin')->group(function () {
+    Route::get('/book/view', [BookController::class, 'index'])->name('book.index');
+ Route::get('/book/create', [BookController::class, 'create'])->name('book.create');
+    Route::post('/book/store', [BookController::class, 'store'])->name('store');
+    Route::get('/book/{book}/edit', [BookController::class, 'edit'])->name('edit');
+    Route::get('/book', [BookController::class, 'edit'])->name('edit');
+    Route::patch('/book', [BookController::class, 'update'])->name('update');
+    Route::delete('/book', [BookController::class, 'destroy'])->name('destroy');
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+                ->name('logout');
+});
