@@ -4,10 +4,11 @@
   <div class="card">
     <div style="background-color: rgb(14, 14, 89)" class="card-header">Profile Details</div>
    <div class="p-4">
-    <form>
+    <form method="post" action="{{ route('update.profile', $user->id) }}" enctype="multipart/form-data">
+      @csrf
       <div class="form-group">
         <label for="name">Name <strong class="text-danger">*</strong></label>
-        <input type="email" name="name" class="form-control" value="{{ $user->name }}">
+        <input type="text" name="name" class="form-control" value="{{ $user->name }}">
       </div>
       <div class="form-group">
         <label for="email">Email:<strong class="text-danger">*</strong></label>

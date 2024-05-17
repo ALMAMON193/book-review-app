@@ -45,10 +45,12 @@
                             <div class="card-header">
                               Well come 
                             </div>
-                              <img src="" alt="Not found">
+                            <img src="{{ !empty($user->image) ? url('upload/user_images/'.$user->image) : url('upload/no_image.jpg'
+
+                            )}}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; radious:50%; margin-left:30px;margin-top:15px">
                               <div class="card-body">
-                                  <h5 class="card-title">Name: {{ $user->name }}</h5>
-                                  <h5 class="card-title">Email: {{ $user->email }}</h5>
+                                  <h5 class="card-title"><b>Name: </b>{{ $user->name }}</h5>
+                                  <h6 class="card-title"><b>Email: </b>{{ $user->email }}</h6>
                               </div>
                           </div>
                           <br>
