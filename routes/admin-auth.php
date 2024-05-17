@@ -43,8 +43,10 @@ Route::middleware('auth:admin')->prefix('admin')->group(function () {
  Route::get('/book/create', [BookController::class, 'create'])->name('book.create');
     Route::post('/book/store', [BookController::class, 'store'])->name('book.store');
     Route::get('/book/{book}/edit', [BookController::class, 'edit'])->name('book.edit');
-   Route::patch('/book/update', [BookController::class, 'update'])->name('update');
-    Route::delete('/book/delete/{id}', [BookController::class, 'destroy'])->name('book.delete');
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+    Route::put('books/{id}', [BookController::class, 'update'])->name('book.update');
+
+    Route::delete('admin/book/{id}', [BookController::class, 'destroy'])->name('book.destroy');
+
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 });

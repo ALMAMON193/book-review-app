@@ -1,58 +1,67 @@
 @extends('backend.master')
 @section('content')
+
 <div class="container-fluid">
-
-  <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-
-  <!-- DataTales Example -->
-  <div class="card shadow mb-4">
-      <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-      </div>
-      <div class="card-body">
-          <div class="table-responsive">
-              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                      <tr>
-                          <th>Image</th>
-                          <th>Title</th>
-                          <th>Author</th>
-                          <th>publisher</th>
-                          <th>Description</th>
-                          <th>Status</th>
-                          <th>Action</th>
-                      </tr>
-                  </thead>
-               @foreach ($books as $book )
-
-               <tbody>
+  <div class="card">
+    <div class="card-header">Books List</div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td>
-                        <img src="data:image/jpeg;base64,{{ base64_encode($book->cover_image) }}" alt="Book Cover" style="max-width: 100px; max-height: 100px;">
-                    </td>
-                    
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Publisher</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($books as $book)
+                <tr>
                     <td>{{ $book->title }}</td>
                     <td>{{ $book->author }}</td>
                     <td>{{ $book->publisher }}</td>
                     <td>{{ $book->description }}</td>
-                    <td>{{ $book->status }}</td>
-                    <td>
-                        
-                        <a href="{{ route('book.edit',$book->id) }}" class="btn btn-primary">Edit</a>
-                        <a href="{{ route('book.delete',$book->id) }}" class="btn btn-danger">Delete</a>
+                    <td class="action-buttons">
+                        <a href="{{ route('book.edit', $book->id) }}" class="btn btn-primary">Edit</a>
+                        <button class="btn btn-danger" onclick="confirmDelete({{ $book->id }})">Delete</button>
+                        <form id="delete-form-{{ $book->id }}" action="{{ route('book.destroy', $book->id) }}" method="POST" style="display: none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
                     </td>
                 </tr>
-               
-               
+                @endforeach
             </tbody>
-                   
-               @endforeach
-              </table>
-          </div>
-      </div>
+        </table>
+    </div>
   </div>
-
 </div>
-@endsection
 
+<style>
+    .action-buttons {
+        display: flex;
+        gap: 10px; /* Adjust the gap as needed */
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+function confirmDelete(bookId) {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('delete-form-' + bookId).submit();
+        }
+    });
+}
+</script>
+
+@endsection

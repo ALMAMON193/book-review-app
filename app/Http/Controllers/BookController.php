@@ -55,4 +55,46 @@ class BookController extends Controller
 
         return redirect()->back()->with('success', 'Book created successfully.');
     }
+    public function edit($id) {
+        $book = Book::findOrFail($id);
+        return view('admin.book.edit-book', compact('book'));
+    }
+
+    public function update(Request $request, $id) {
+        $request->validate([
+            'title' => 'required|max:255',
+            'author' => 'required|max:255',
+            'publisher' => 'required|max:255',
+            'description' => 'required',
+            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+    
+        $book = Book::findOrFail($id);
+        $book->title = $request->title;
+        $book->author = $request->author;
+        $book->publisher = $request->publisher;
+        $book->description = $request->description;
+    
+        if ($request->hasFile('cover_image')) {
+            $imageName = time().'.'.$request->cover_image->extension();
+            $request->cover_image->move(public_path('images'), $imageName);
+            $book->cover_image = $imageName;
+        }
+    
+        $book->save();
+    
+        return redirect()->route('book.index')->with('success', 'Book updated successfully.');
+    }
+    
+    public function destroy($id) {
+        $book = Book::findOrFail($id);
+        $book->delete();
+    
+        $notification = array(
+            'message' => 'Book deleted successfully!',
+            'alert-type' => 'success'
+        );
+    
+        return redirect()->back()->with($notification);
+    }
 }
