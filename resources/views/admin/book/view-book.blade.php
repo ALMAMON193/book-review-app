@@ -8,6 +8,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
+                    <th>Image</th>
                     <th>Title</th>
                     <th>Author</th>
                     <th>Publisher</th>
@@ -18,6 +19,7 @@
             <tbody>
                 @foreach($books as $book)
                 <tr>
+                    <td><img src="{{ asset('upload/books/' . $book->cover_image) }}" alt="Book Image" style="width:100px;height:auto;"></td>
                     <td>{{ $book->title }}</td>
                     <td>{{ $book->author }}</td>
                     <td>{{ $book->publisher }}</td>
