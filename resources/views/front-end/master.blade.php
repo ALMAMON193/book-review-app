@@ -22,6 +22,7 @@
 
 </head>
 
+
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -62,9 +63,12 @@
                               <a href=""><li class="list-group-item">Books</li></a>
                              <a href=""> <li class="list-group-item">Review</li></a>
                              <a href="{{ route('user.profile') }}"> <li class="list-group-item">Profile</li></a>
-                             <a href=""> <li class="list-group-item">Cras justo odio</li></a>
-                            <a href="">  <li class="list-group-item">Dapibus ac facilisis in</li></a>
-                              <a href=""><li class="list-group-item">Vestibulum at eros</li></a>
+                             <a href=""> <li class="list-group-item">My reviews</li></a>
+                             <a href="{{ route('profile.change.password', ['id' => Auth::user()->id]) }}">
+                              <li class="list-group-item">Change password</li>
+                          </a>
+                          
+                              <a href="{{ route('profile.logout') }}"><li class="list-group-item">Log out</li></a>
                             </ul>
                           </div>
                       </div>

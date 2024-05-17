@@ -15,7 +15,11 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/profile', [UserController::class, 'index'])->name('user.profile');
     Route::post('/profile/update/{id}', [UserController::class, 'ProfileUpdate'])->name('update.profile');
-    
+    Route::get('/profile/change-password/{id}', [UserController::class, 'ChangePassword'])->name('profile.change.password');
+    Route::post('/profile/update-password/{id}', [UserController::class, 'UpdatePassword'])->name('profile.update.password');
+
+    Route::get('/logout', [UserController::class, 'Logout'])->name('profile.logout');
+
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
