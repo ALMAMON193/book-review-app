@@ -41,7 +41,7 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
 Route::middleware('auth:admin')->prefix('admin')->group(function () {
     Route::get('/book/view', [BookController::class, 'index'])->name('book.index');
  Route::get('/book/create', [BookController::class, 'create'])->name('book.create');
-    Route::post('/book/store', [BookController::class, 'store'])->name('store');
+    Route::post('/book/store', [BookController::class, 'store'])->name('book.store');
     Route::get('/book/{book}/edit', [BookController::class, 'edit'])->name('edit');
     Route::get('/book', [BookController::class, 'edit'])->name('edit');
     Route::patch('/book', [BookController::class, 'update'])->name('update');
