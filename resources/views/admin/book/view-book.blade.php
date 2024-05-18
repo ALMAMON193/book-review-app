@@ -13,6 +13,8 @@
                     <th>Author</th>
                     <th>Publisher</th>
                     <th>Description</th>
+                    <th>Status</th>
+
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -24,6 +26,16 @@
                     <td>{{ $book->author }}</td>
                     <td>{{ $book->publisher }}</td>
                     <td>{{ $book->description }}</td>
+                    <td class="{{ $book->status == 1 ? 'text-success' : 'text-danger' }}">
+                        @if($book->status == 1)
+                            Active
+                        @else
+                            Block
+                        @endif
+                    </td>
+                    
+                    
+
                     <td class="action-buttons">
                         <a href="{{ route('book.edit', $book->id) }}" class="btn btn-primary">Edit</a>
                         <button class="btn btn-danger" onclick="confirmDelete({{ $book->id }})">Delete</button>

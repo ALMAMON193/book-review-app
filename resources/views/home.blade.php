@@ -46,27 +46,29 @@
                         @foreach ($books as $book)
                             <div class="col-md-4">
                                 <div class="card shadow-lg border-0">
-                                    <div class="card" style="width:400px">
-                                        <img class="card-img-top" src="{{ asset('upload/books/'.$book->cover_image) }}" alt="Card image" style="width:100%">
-                                        <div class="card-body">
-                                          <h4 class="card-title">John Doe</h4>
-                                          <div class="star-rating d-inline-flex ml-2" title="">
-                                            <span class="rating-text theme-font theme-yellow">5.0</span>
-                                            <div class="star-rating d-inline-flex mx-2" title="">
-                                                <div class="back-stars">
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <div class="front-stars" style="width: 100%"></div>
+                                    <a href="{{ route('book.details', $book->id)}}">
+                                        <div class="card" style="width:400px">
+                                            <img class="card-img-top" src="{{ asset('upload/books/'.$book->cover_image) }}" alt="Card image" style="width:100%">
+                                            <div class="card-body">
+                                              <h4 class="card-title">John Doe</h4>
+                                              <div class="star-rating d-inline-flex ml-2" title="">
+                                                <span class="rating-text theme-font theme-yellow">5.0</span>
+                                                <div class="star-rating d-inline-flex mx-2" title="">
+                                                    <div class="back-stars">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <div class="front-stars" style="width: 100%"></div>
+                                                    </div>
                                                 </div>
+                                                <span class="theme-font text-muted">(2 Reviews)</span>
                                             </div>
-                                            <span class="theme-font text-muted">(2 Reviews)</span>
+                                            
+                                            </div>
                                         </div>
-                                        
-                                        </div>
-                                      </div>
+                                    </a>
                                     
                                 </div>
                             </div>
